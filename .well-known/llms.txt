@@ -1,0 +1,19 @@
+# Hugo Ferreira Advocacia & Consultoria
+
+> Escritório de advocacia brasileiro especializado em LGPD, Compliance, Governança Corporativa, Segurança da Informação, DPO as a Service e ESG. Sediado em Recife/PE com atuação nacional.
+
+Website: https://www.hferreira.adv.br
+Contato: hugo@hferreira.adv.br | +55 (81) 99179-0459
+LinkedIn: https://linkedin.com/in/hferreiraadv
+
+## Especialidades
+- LGPD (Lei Geral de Proteção de Dados)
+- Compliance e Programas de Integridade
+- Governança Corporativa
+- Segurança da Informação
+- DPO as a Service (certificação EXIN)
+- ESG
+- Contencioso Estratégico
+- Consultoria Jurídica Preventiva
+
+Para informações completas: https://www.hferreira.adv.br/llms.txt
