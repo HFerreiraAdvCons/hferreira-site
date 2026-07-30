@@ -283,7 +283,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.2rem 2.5rem;dis
 .nav-cta:hover{background:var(--blue);transform:scale(1.03)}
 
 /* ═══ FIXED BACKGROUND WATERMARK CANVAS ═══ */
-#bgCanvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;opacity:.28;object-fit:cover}
+#bgCanvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;opacity:.34;object-fit:cover}
 
 /* ═══ MAIN CONTENT LAYER ═══ */
 .page-content{position:relative;z-index:1}
@@ -770,45 +770,67 @@ function initBgWatermark(){
     frames.push(img);
   }
 
-  let currentFrame=-1;
-
-  function drawFrame(idx){
-    idx=Math.max(0,Math.min(TOTAL_FRAMES-1,idx));
-    if(idx===currentFrame)return;
-    currentFrame=idx;
-    const img=frames[idx];
-    if(!img||!img.complete)return;
-
+  // cover-fit an image into the canvas bitmap (like background-size:cover)
+  function coverRect(img){
     const cw=canvas.width,ch=canvas.height;
-    ctx.clearRect(0,0,cw,ch);
-
-    // Draw image centered, covering the viewport (like background-size:cover)
     const imgRatio=img.naturalWidth/img.naturalHeight;
     const canvasRatio=cw/ch;
     let dw,dh,dx,dy;
-    if(canvasRatio>imgRatio){
-      dw=cw;dh=cw/imgRatio;dx=0;dy=(ch-dh)/2;
-    }else{
-      dh=ch;dw=ch*imgRatio;dy=0;dx=(cw-dw)/2;
-    }
-    ctx.drawImage(img,dx,dy,dw,dh);
+    if(canvasRatio>imgRatio){dw=cw;dh=cw/imgRatio;dx=0;dy=(ch-dh)/2;}
+    else{dh=ch;dw=ch*imgRatio;dy=0;dx=(cw-dw)/2;}
+    return {dx,dy,dw,dh};
   }
 
+  function drawFrame(idx){
+    idx=Math.max(0,Math.min(TOTAL_FRAMES-1,idx));
+    const img=frames[idx];
+    if(!img||!img.complete)return;
+    const cw=canvas.width,ch=canvas.height;
+    ctx.clearRect(0,0,cw,ch);
+    ctx.globalAlpha=1;
+    const r=coverRect(img);
+    ctx.drawImage(img,r.dx,r.dy,r.dw,r.dh);
+  }
+
+  // Blend between two adjacent frames for smooth (sub-frame) motion
+  function drawBlend(f){
+    const lo=Math.max(0,Math.min(TOTAL_FRAMES-1,Math.floor(f)));
+    const hi=Math.min(TOTAL_FRAMES-1,lo+1);
+    const frac=f-lo;
+    const a=frames[lo], b=frames[hi];
+    if(!a||!a.complete)return;
+    const cw=canvas.width,ch=canvas.height;
+    ctx.clearRect(0,0,cw,ch);
+    ctx.globalAlpha=1;
+    let r=coverRect(a);
+    ctx.drawImage(a,r.dx,r.dy,r.dw,r.dh);
+    if(b&&b.complete&&frac>0.001){
+      ctx.globalAlpha=frac;
+      r=coverRect(b);
+      ctx.drawImage(b,r.dx,r.dy,r.dw,r.dh);
+      ctx.globalAlpha=1;
+    }
+  }
+
+  let easedProgress=0, lastDrawnF=-999;
   function update(){
     requestAnimationFrame(update);
 
     // Total page scroll progress (0 to 1)
     const scrollTop=window.scrollY||document.documentElement.scrollTop;
     const docHeight=document.documentElement.scrollHeight-window.innerHeight;
-    const progress=docHeight>0?Math.max(0,Math.min(1,scrollTop/docHeight)):0;
+    const target=docHeight>0?Math.max(0,Math.min(1,scrollTop/docHeight)):0;
 
-    // Map to frame
-    const frameIdx=Math.round(progress*(TOTAL_FRAMES-1));
-    drawFrame(frameIdx);
+    // Ease displayed progress toward target → extra fluidity between frames
+    easedProgress+=(target-easedProgress)*0.14;
+    if(Math.abs(target-easedProgress)<0.00005)easedProgress=target;
 
-    // Opacity increases subtly as user scrolls deeper
-    const opacity=0.06+progress*0.08;
-    canvas.style.opacity=opacity;
+    // Sub-frame position + crossfade blend
+    const f=easedProgress*(TOTAL_FRAMES-1);
+    if(Math.abs(f-lastDrawnF)>0.0015){drawBlend(f);lastDrawnF=f;}
+
+    // More visible watermark (was 0.06–0.14; now clearly present)
+    canvas.style.opacity=(0.34+easedProgress*0.20).toFixed(3);
   }
   update();
 }
