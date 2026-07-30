@@ -327,28 +327,30 @@ header{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.2rem 2.5rem;dis
 .text-section h2{font-family:var(--sans);font-size:clamp(2rem,5vw,3.5rem);font-weight:400;line-height:1.15;color:var(--txt);margin-bottom:1.5rem}
 .text-section p{font-size:1rem;color:var(--txt2);line-height:1.85;font-weight:400}
 
-/* ═══ SERVICES — Accordion (Anorexus polymount style) ═══ */
-#services{padding:3rem 2rem 4rem;max-width:1200px;margin:0 auto}
-.svc-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:3rem}
+/* ═══ SERVICES — Stacking Cards (scroll reveal) ═══ */
+#services{padding:3rem 0 0;position:relative}
+.svc-intro{max-width:1200px;margin:0 auto 1rem;padding:0 2rem}
+.svc-intro .svc-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
 .svc-header h2{font-family:var(--sans);font-size:clamp(2rem,4vw,3rem);font-weight:400}
 .svc-header p{font-size:.92rem;color:var(--txt2);line-height:1.8}
-.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
-.svc-visual{border-radius:16px;overflow:hidden;height:400px;background:var(--bg2);position:relative}
-.svc-visual canvas{width:100%!important;height:100%!important}
-.svc-list{display:flex;flex-direction:column;gap:0}
-.svc-item{border-bottom:1px solid var(--bg3);padding:1.2rem 0;cursor:pointer;transition:all .3s var(--ease)}
-.svc-item:first-child{border-top:1px solid var(--bg3)}
-.svc-item-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.svc-item-num{font-family:var(--sans);font-size:.82rem;color:var(--txt3);font-weight:500;min-width:2rem}
-.svc-item-name{font-family:var(--sans);font-size:.95rem;font-weight:600;color:var(--txt);flex:1}
-.svc-item-arrow{width:32px;height:32px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;transition:all .3s var(--ease);flex-shrink:0}
-.svc-item-arrow svg{width:14px;height:14px;stroke:var(--txt3);fill:none;stroke-width:2;transition:transform .3s var(--ease)}
-.svc-item.open .svc-item-arrow{background:var(--black)}
-.svc-item.open .svc-item-arrow svg{stroke:var(--white);transform:rotate(180deg)}
-.svc-item.open .svc-item-name{color:var(--blue)}
-.svc-item-body{max-height:0;overflow:hidden;transition:max-height .5s var(--ease),padding .3s;padding:0 0 0 2rem}
-.svc-item.open .svc-item-body{max-height:200px;padding:.8rem 0 .4rem 2rem}
-.svc-item-body p{font-size:.85rem;color:var(--txt2);line-height:1.7}
+.svc-stack{position:relative}
+.svc-card{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:5rem 2rem 2rem;background:var(--bg)}
+.svc-card-inner{width:100%;max-width:1280px;display:grid;grid-template-columns:1.05fr .95fr;min-height:78vh;border-radius:26px;overflow:hidden;background:linear-gradient(135deg,#0a3d5c,#08283b);box-shadow:0 -18px 60px rgba(10,61,92,.18),0 20px 60px rgba(0,0,0,.14)}
+.svc-card-img{position:relative;background-size:cover;background-position:center;min-height:340px}
+.svc-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,40,59,0) 55%,rgba(8,40,59,.85) 100%)}
+.svc-card:nth-child(even) .svc-card-inner{grid-template-columns:.95fr 1.05fr}
+.svc-card:nth-child(even) .svc-card-img{order:2}
+.svc-card:nth-child(even) .svc-card-img::after{background:linear-gradient(270deg,rgba(8,40,59,0) 55%,rgba(8,40,59,.85) 100%)}
+.svc-card-content{padding:clamp(2rem,4vw,4rem);color:#fff;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.svc-card-num{font-family:var(--mono);font-size:.72rem;letter-spacing:.25em;color:var(--gold-l);font-weight:500;margin-bottom:1.1rem}
+.svc-card-content h3{font-family:var(--sans);font-size:clamp(2rem,3.6vw,3.4rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.2rem}
+.svc-card-content>p{font-size:clamp(.92rem,1.2vw,1.05rem);line-height:1.75;color:rgba(255,255,255,.82);max-width:34ch;margin-bottom:1.6rem}
+.svc-feats{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+.svc-feats li{display:flex;align-items:flex-start;gap:.7rem;font-size:.9rem;color:rgba(255,255,255,.9);line-height:1.5}
+.svc-feats li::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--gold-l);margin-top:.5rem;flex-shrink:0}
+.svc-cta{display:inline-flex;align-items:center;gap:.6rem;align-self:flex-start;background:#fff;color:var(--blue);padding:.85rem 1.8rem;border-radius:100px;font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:all .3s var(--ease)}
+.svc-cta:hover{background:var(--gold-l);color:#08283b;transform:translateX(4px)}
+.svc-cta svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2}
 
 /* ═══ PROCESS STEPS — Horizontal ═══ */
 #process{padding:2rem 2rem 4rem;max-width:1200px;margin:0 auto}
@@ -404,13 +406,15 @@ footer a{color:var(--blue);text-decoration:none}
 
 /* ═══ MOBILE ═══ */
 @media(max-width:1024px){
-  .svc-grid{grid-template-columns:1fr}
-  .svc-visual{height:300px}
   .proc-steps{grid-template-columns:repeat(2,1fr)}
   .contact-grid{grid-template-columns:1fr}
-  .svc-header{grid-template-columns:1fr}
+  .svc-intro .svc-header{grid-template-columns:1fr;gap:1rem}
   .stats-bar{grid-template-columns:repeat(2,1fr);border-radius:12px;gap:1.5rem}
   .stat:not(:last-child)::after{display:none}
+  .svc-card-inner,.svc-card:nth-child(even) .svc-card-inner{grid-template-columns:1fr;min-height:0}
+  .svc-card-img,.svc-card:nth-child(even) .svc-card-img{order:0;min-height:240px}
+  .svc-card-img::after,.svc-card:nth-child(even) .svc-card-img::after{background:linear-gradient(0deg,rgba(8,40,59,.85) 0%,rgba(8,40,59,0) 45%)}
+  .svc-card{min-height:auto;position:relative;top:0!important;padding:1rem 1.2rem}
 }
 @media(max-width:600px){
   header{padding:.8rem 1rem}
@@ -474,40 +478,118 @@ footer a{color:var(--blue);text-decoration:none}
   <p class="rv" style="transition-delay:.15s">Acreditamos que a <strong>proteção de dados</strong> e a <strong>segurança da informação</strong> são escolhas profundamente estratégicas, com três pilares fundamentais: <strong>conformidade regulatória (compliance)</strong>, <strong>governança corporativa</strong> e <strong>privacidade</strong>. Nosso escritório atua na interseção entre direito e tecnologia, oferecendo soluções em <strong>LGPD</strong>, compliance e governança que blindam sua empresa contra riscos cibernéticos e regulatórios.</p>
 </div>
 
-<!-- ═══ SERVICES ═══ -->
+<!-- ═══ SERVICES — Stacking Cards ═══ -->
 <section id="services">
-  <div class="svc-header">
-    <h2 class="rv">Áreas de Atuação</h2>
-    <p class="rv" style="transition-delay:.1s">Soluções jurídicas especializadas para cada dimensão da proteção corporativa, desde compliance até contencioso estratégico.</p>
-  </div>
-  <div class="svc-grid">
-    <div class="svc-visual rv-s" id="svcScene"></div>
-    <div class="svc-list stg">
-      <div class="svc-item open rv" style="--i:0">
-        <div class="svc-item-head"><span class="svc-item-num">1.</span><span class="svc-item-name">Compliance</span><div class="svc-item-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
-        <div class="svc-item-body"><p>Programas de integridade, políticas internas e mapeamento de riscos para conformidade regulatória da sua empresa.</p></div>
-      </div>
-      <div class="svc-item rv" style="--i:1">
-        <div class="svc-item-head"><span class="svc-item-num">2.</span><span class="svc-item-name">LGPD & Privacidade</span><div class="svc-item-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
-        <div class="svc-item-body"><p>Adequação completa à Lei Geral de Proteção de Dados, mapeamento de dados e gestão de incidentes.</p></div>
-      </div>
-      <div class="svc-item rv" style="--i:2">
-        <div class="svc-item-head"><span class="svc-item-num">3.</span><span class="svc-item-name">DPO as a Service</span><div class="svc-item-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
-        <div class="svc-item-body"><p>Encarregado de Dados terceirizado com certificação EXIN, ponte entre empresa e ANPD.</p></div>
-      </div>
-      <div class="svc-item rv" style="--i:3">
-        <div class="svc-item-head"><span class="svc-item-num">4.</span><span class="svc-item-name">ESG & Sustentabilidade</span><div class="svc-item-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
-        <div class="svc-item-body"><p>Consultoria em critérios ambientais, sociais e de governança para o mercado sustentável.</p></div>
-      </div>
-      <div class="svc-item rv" style="--i:4">
-        <div class="svc-item-head"><span class="svc-item-num">5.</span><span class="svc-item-name">Contencioso Estratégico</span><div class="svc-item-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
-        <div class="svc-item-body"><p>Atuação contenciosa em demandas complexas com estratégia focada em resultados mensuráveis.</p></div>
-      </div>
-      <div class="svc-item rv" style="--i:5">
-        <div class="svc-item-head"><span class="svc-item-num">6.</span><span class="svc-item-name">Consultoria Jurídica</span><div class="svc-item-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
-        <div class="svc-item-body"><p>Assessoria preventiva e pareceres jurídicos para tomada de decisão estratégica.</p></div>
-      </div>
+  <div class="svc-intro">
+    <div class="svc-header">
+      <h2 class="rv">Áreas de Atuação</h2>
+      <p class="rv" style="transition-delay:.1s">Soluções jurídicas especializadas para cada dimensão da proteção corporativa. Role para explorar cada área — e fale conosco diretamente.</p>
     </div>
+  </div>
+  <div class="svc-stack">
+
+    <article class="svc-card">
+      <div class="svc-card-inner">
+        <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80')"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-num">01 — COMPLIANCE</div>
+          <h3>Compliance &amp;<br>Integridade</h3>
+          <p>Programas de integridade, políticas internas e mapeamento de riscos para manter sua empresa em conformidade regulatória.</p>
+          <ul class="svc-feats">
+            <li>Programas de integridade e códigos de conduta</li>
+            <li>Mapeamento de riscos regulatórios</li>
+            <li>Canais de denúncia e due diligence</li>
+          </ul>
+          <a href="https://wa.me/5581991790459?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20Compliance" target="_blank" rel="noopener" class="svc-cta">Entre em contato <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="svc-card">
+      <div class="svc-card-inner">
+        <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1400&q=80')"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-num">02 — PROTEÇÃO DE DADOS</div>
+          <h3>LGPD &amp;<br>Privacidade</h3>
+          <p>Adequação completa à Lei Geral de Proteção de Dados, com mapeamento de dados, políticas de privacidade e gestão de incidentes.</p>
+          <ul class="svc-feats">
+            <li>Adequação e diagnóstico de conformidade LGPD</li>
+            <li>Mapeamento de dados e Relatório de Impacto (RIPD)</li>
+            <li>Gestão de incidentes de segurança</li>
+          </ul>
+          <a href="https://wa.me/5581991790459?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20LGPD%20e%20Privacidade" target="_blank" rel="noopener" class="svc-cta">Entre em contato <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="svc-card">
+      <div class="svc-card-inner">
+        <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1782338938412-78d94891a3a0?auto=format&fit=crop&w=1400&q=80')"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-num">03 — ENCARREGADO DE DADOS</div>
+          <h3>DPO as<br>a Service</h3>
+          <p>Encarregado de Dados terceirizado com certificação EXIN, atuando como ponte entre a sua empresa e a ANPD.</p>
+          <ul class="svc-feats">
+            <li>DPO certificado EXIN sob demanda</li>
+            <li>Interlocução oficial com a ANPD</li>
+            <li>Monitoramento contínuo de conformidade</li>
+          </ul>
+          <a href="https://wa.me/5581991790459?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20DPO%20as%20a%20Service" target="_blank" rel="noopener" class="svc-cta">Entre em contato <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="svc-card">
+      <div class="svc-card-inner">
+        <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?auto=format&fit=crop&w=1400&q=80')"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-num">04 — SUSTENTABILIDADE</div>
+          <h3>ESG &amp;<br>Sustentabilidade</h3>
+          <p>Consultoria em critérios ambientais, sociais e de governança para posicionar sua empresa no mercado sustentável e atrair investimentos.</p>
+          <ul class="svc-feats">
+            <li>Estruturação de governança ESG</li>
+            <li>Adequação a critérios socioambientais</li>
+            <li>Relatórios e indicadores de sustentabilidade</li>
+          </ul>
+          <a href="https://wa.me/5581991790459?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20ESG" target="_blank" rel="noopener" class="svc-cta">Entre em contato <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="svc-card">
+      <div class="svc-card-inner">
+        <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1400&q=80')"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-num">05 — LITÍGIOS</div>
+          <h3>Contencioso<br>Estratégico</h3>
+          <p>Atuação contenciosa em demandas complexas, com estratégia focada em resultados mensuráveis e proteção do seu negócio.</p>
+          <ul class="svc-feats">
+            <li>Demandas cíveis e empresariais complexas</li>
+            <li>Estratégia processual orientada a resultado</li>
+            <li>Defesa em processos regulatórios e da ANPD</li>
+          </ul>
+          <a href="https://wa.me/5581991790459?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20Contencioso" target="_blank" rel="noopener" class="svc-cta">Entre em contato <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="svc-card">
+      <div class="svc-card-inner">
+        <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1400&q=80')"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-num">06 — ASSESSORIA</div>
+          <h3>Consultoria<br>Jurídica</h3>
+          <p>Assessoria preventiva e pareceres jurídicos para embasar decisões estratégicas com segurança e visão de longo prazo.</p>
+          <ul class="svc-feats">
+            <li>Pareceres e consultoria preventiva</li>
+            <li>Apoio jurídico à tomada de decisão</li>
+            <li>Governança corporativa e contratos</li>
+          </ul>
+          <a href="https://wa.me/5581991790459?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20Consultoria%20Jur%C3%ADdica" target="_blank" rel="noopener" class="svc-cta">Entre em contato <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </article>
+
   </div>
 </section>
 
