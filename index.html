@@ -381,8 +381,12 @@ header{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.2rem 2.5rem;dis
 .contact-map{border-radius:20px;overflow:hidden;border:1px solid var(--bg3);min-height:380px;background:var(--bg2)}
 .contact-map iframe{width:100%;height:100%;border:0;min-height:380px}
 
+/* ═══ READABLE FROSTED PANEL (legibilidade sobre o fundo animado) ═══ */
+.rp{background:rgba(247,247,247,.82);-webkit-backdrop-filter:blur(10px) saturate(115%);backdrop-filter:blur(10px) saturate(115%);border:1px solid rgba(255,255,255,.55);border-radius:26px;box-shadow:0 14px 50px rgba(10,61,92,.07)}
+
 /* ═══ FAQ SECTION ═══ */
-#faq{padding:3rem 2rem 4rem;max-width:900px;margin:0 auto}
+#faq{padding:3rem 2rem 4rem;max-width:900px;margin:3rem auto}
+#faq.rp{padding-left:clamp(1.4rem,4vw,3rem);padding-right:clamp(1.4rem,4vw,3rem)}
 .faq-item{border-bottom:1px solid var(--bg3);padding:1.5rem 0;cursor:pointer}
 .faq-item:first-of-type{border-top:1px solid var(--bg3)}
 .faq-q{display:flex;align-items:center;justify-content:space-between;gap:1rem;font-family:var(--sans);font-size:.95rem;font-weight:600;color:var(--txt)}
@@ -537,7 +541,7 @@ html.is-loading{overflow:hidden}
 </section>
 
 <!-- ═══ DICTIONARY SECTION (des·o·la·tion style) ═══ -->
-<section id="dictionary">
+<section id="dictionary" class="rp">
   <div class="dict-word rv">pro<span class="dot">·</span>te<span class="dot">·</span>ção</div>
   <div class="dict-phonetic rv" style="transition-delay:.15s">/pro.te.ˈsɐ̃w̃/</div>
   <p class="dict-body rv" style="transition-delay:.3s">Em um mundo de dados expostos, a proteção tece sua rede silenciosa. Hugo Ferreira Advocacia & Consultoria, referência em assessoria jurídica com foco em proteção de dados, governança corporativa e conformidade regulatória. Com certificação EXIN e atuação em 27 estados, oferecemos segurança jurídica sob medida para empresas que valorizam privacidade e inovação.</p>
@@ -555,7 +559,7 @@ html.is-loading{overflow:hidden}
 </section>
 
 <!-- ═══ ABOUT TEXT ═══ -->
-<div class="text-section">
+<div class="text-section rp" style="max-width:900px">
   <h2 class="rv">Segurança Jurídica e Proteção de Dados<br>para a Era Digital</h2>
   <p class="rv" style="transition-delay:.15s">Acreditamos que a <strong>proteção de dados</strong> e a <strong>segurança da informação</strong> são escolhas profundamente estratégicas, com três pilares fundamentais: <strong>conformidade regulatória (compliance)</strong>, <strong>governança corporativa</strong> e <strong>privacidade</strong>. Nosso escritório atua na interseção entre direito e tecnologia, oferecendo soluções em <strong>LGPD</strong>, compliance e governança que blindam sua empresa contra riscos cibernéticos e regulatórios.</p>
 </div>
@@ -719,7 +723,7 @@ html.is-loading{overflow:hidden}
 </section>
 
 <!-- ═══ FAQ — SEO + AI Search Optimization ═══ -->
-<section id="faq">
+<section id="faq" class="rp">
   <div class="text-section" style="padding-bottom:0"><h2 class="rv">Perguntas Frequentes</h2><p class="rv" style="transition-delay:.1s">Tire suas dúvidas sobre LGPD, Compliance, Governança e Proteção de Dados.</p></div>
   <div class="faq-item open rv" style="--i:0">
     <div class="faq-q">O que é LGPD e por que minha empresa precisa se adequar?</div>
