@@ -327,20 +327,21 @@ header{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.2rem 2.5rem;dis
 .text-section h2{font-family:var(--sans);font-size:clamp(2rem,5vw,3.5rem);font-weight:400;line-height:1.15;color:var(--txt);margin-bottom:1.5rem}
 .text-section p{font-size:1rem;color:var(--txt2);line-height:1.85;font-weight:400}
 
-/* ═══ SERVICES — Stacking Cards (scroll reveal) ═══ */
+/* ═══ SERVICES — Stacking Cards (Daton-style: full-screen, empilha, fade-in) ═══ */
 #services{padding:3rem 0 0;position:relative}
-.svc-intro{max-width:1200px;margin:0 auto 1rem;padding:0 2rem}
+.svc-intro{max-width:1200px;margin:0 auto 2rem;padding:0 2rem}
 .svc-intro .svc-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
 .svc-header h2{font-family:var(--sans);font-size:clamp(2rem,4vw,3rem);font-weight:400}
 .svc-header p{font-size:.92rem;color:var(--txt2);line-height:1.8}
-.svc-stack{position:relative}
-.svc-card{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:5rem 2rem 2rem;background:var(--bg)}
-.svc-card-inner{width:100%;max-width:1280px;display:grid;grid-template-columns:1.05fr .95fr;min-height:78vh;border-radius:26px;overflow:hidden;background:linear-gradient(135deg,#0a3d5c,#08283b);box-shadow:0 -18px 60px rgba(10,61,92,.18),0 20px 60px rgba(0,0,0,.14)}
-.svc-card-img{position:relative;background-size:cover;background-position:center;min-height:340px}
-.svc-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,40,59,0) 55%,rgba(8,40,59,.85) 100%)}
-.svc-card:nth-child(even) .svc-card-inner{grid-template-columns:.95fr 1.05fr}
-.svc-card:nth-child(even) .svc-card-img{order:2}
-.svc-card:nth-child(even) .svc-card-img::after{background:linear-gradient(270deg,rgba(8,40,59,0) 55%,rgba(8,40,59,.85) 100%)}
+.svc-stack{position:relative;padding-bottom:2rem}
+/* each card is full-height & sticky; increasing padding-top makes previous cards' tops peek → stack effect */
+.svc-card{position:sticky;top:0;height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:calc(4.2rem + var(--i,0)*1.4rem) 2rem 1rem}
+.svc-card-inner{width:100%;max-width:1220px;height:min(78vh,750px);display:grid;grid-template-columns:1.08fr .92fr;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#0a3d5c,#08283b);box-shadow:0 -6px 30px rgba(0,0,0,.14),0 28px 70px rgba(8,40,59,.30)}
+/* fade-in / rise as each card enters */
+.svc-card-inner.rv-s{opacity:0;transform:translateY(60px) scale(.97);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.svc-card-inner.rv-s.v{opacity:1;transform:none}
+.svc-card-img{position:relative;background-size:cover;background-position:center}
+.svc-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,40,59,0) 48%,rgba(8,40,59,.92) 100%)}
 .svc-card-content{padding:clamp(2rem,4vw,4rem);color:#fff;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
 .svc-card-num{font-family:var(--mono);font-size:.72rem;letter-spacing:.25em;color:var(--gold-l);font-weight:500;margin-bottom:1.1rem}
 .svc-card-content h3{font-family:var(--sans);font-size:clamp(2rem,3.6vw,3.4rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.2rem}
@@ -411,10 +412,11 @@ footer a{color:var(--blue);text-decoration:none}
   .svc-intro .svc-header{grid-template-columns:1fr;gap:1rem}
   .stats-bar{grid-template-columns:repeat(2,1fr);border-radius:12px;gap:1.5rem}
   .stat:not(:last-child)::after{display:none}
-  .svc-card-inner,.svc-card:nth-child(even) .svc-card-inner{grid-template-columns:1fr;min-height:0}
-  .svc-card-img,.svc-card:nth-child(even) .svc-card-img{order:0;min-height:240px}
-  .svc-card-img::after,.svc-card:nth-child(even) .svc-card-img::after{background:linear-gradient(0deg,rgba(8,40,59,.85) 0%,rgba(8,40,59,0) 45%)}
-  .svc-card{min-height:auto;position:relative;top:0!important;padding:1rem 1.2rem}
+  .svc-card-inner{grid-template-columns:1fr;height:auto}
+  .svc-card-img{min-height:240px}
+  .svc-card-img::after{background:linear-gradient(0deg,rgba(8,40,59,.85) 0%,rgba(8,40,59,0) 45%)}
+  .svc-card{height:auto;position:relative;top:0!important;padding:1rem 1.2rem}
+  .svc-card-inner.rv-s{transform:translateY(40px)}
 }
 @media(max-width:600px){
   header{padding:.8rem 1rem}
@@ -488,8 +490,8 @@ footer a{color:var(--blue);text-decoration:none}
   </div>
   <div class="svc-stack">
 
-    <article class="svc-card">
-      <div class="svc-card-inner">
+    <article class="svc-card" style="--i:0">
+      <div class="svc-card-inner rv-s">
         <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80')"></div>
         <div class="svc-card-content">
           <div class="svc-card-num">01 — COMPLIANCE</div>
@@ -505,8 +507,8 @@ footer a{color:var(--blue);text-decoration:none}
       </div>
     </article>
 
-    <article class="svc-card">
-      <div class="svc-card-inner">
+    <article class="svc-card" style="--i:1">
+      <div class="svc-card-inner rv-s">
         <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1400&q=80')"></div>
         <div class="svc-card-content">
           <div class="svc-card-num">02 — PROTEÇÃO DE DADOS</div>
@@ -522,8 +524,8 @@ footer a{color:var(--blue);text-decoration:none}
       </div>
     </article>
 
-    <article class="svc-card">
-      <div class="svc-card-inner">
+    <article class="svc-card" style="--i:2">
+      <div class="svc-card-inner rv-s">
         <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1782338938412-78d94891a3a0?auto=format&fit=crop&w=1400&q=80')"></div>
         <div class="svc-card-content">
           <div class="svc-card-num">03 — ENCARREGADO DE DADOS</div>
@@ -539,8 +541,8 @@ footer a{color:var(--blue);text-decoration:none}
       </div>
     </article>
 
-    <article class="svc-card">
-      <div class="svc-card-inner">
+    <article class="svc-card" style="--i:3">
+      <div class="svc-card-inner rv-s">
         <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?auto=format&fit=crop&w=1400&q=80')"></div>
         <div class="svc-card-content">
           <div class="svc-card-num">04 — SUSTENTABILIDADE</div>
@@ -556,8 +558,8 @@ footer a{color:var(--blue);text-decoration:none}
       </div>
     </article>
 
-    <article class="svc-card">
-      <div class="svc-card-inner">
+    <article class="svc-card" style="--i:4">
+      <div class="svc-card-inner rv-s">
         <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1400&q=80')"></div>
         <div class="svc-card-content">
           <div class="svc-card-num">05 — LITÍGIOS</div>
@@ -573,8 +575,8 @@ footer a{color:var(--blue);text-decoration:none}
       </div>
     </article>
 
-    <article class="svc-card">
-      <div class="svc-card-inner">
+    <article class="svc-card" style="--i:5">
+      <div class="svc-card-inner rv-s">
         <div class="svc-card-img" style="background-image:url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1400&q=80')"></div>
         <div class="svc-card-content">
           <div class="svc-card-num">06 — ASSESSORIA</div>
